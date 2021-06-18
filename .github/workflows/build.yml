@@ -1,0 +1,30 @@
+name: MPV Build Process
+on:
+  push:
+    branches: [aesthetics]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Setup Java environment in order to build the Android app.
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      # Get the dependencies
+      - run: cd buildscripts/ && bash download.sh
+      # Build The Debug APK
+      - run: cd buildscripts/ && bash buildall.sh
+      # Upload generated apk to the artifacts.
+      - uses: marvinpinto/action-automatic-releases@latest
+        with:
+          prerelease: false
+          repo_token: ${{ secrets.PANCAKE }}
+          automatic_release_tag: "latest"
+          title: "App Releases"
+          files: |
+            LICENSE
+            app/build/outputs/apk/debug/*.apk
