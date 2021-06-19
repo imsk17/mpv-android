@@ -511,7 +511,9 @@ class MPVActivity : AppCompatActivity(), MPVLib.EventObserver, TouchGesturesObse
             Log.w(TAG, "cannot show UI in locked mode")
             return
         }
-
+        if (player.isInitialized) {
+            MPVLib.setPropertyString("sub-margin-y", "100")
+        }
         // remove all callbacks that were to be run for fading
         fadeHandler.removeCallbacks(fadeRunnable)
         controls.animate().cancel()
@@ -550,6 +552,9 @@ class MPVActivity : AppCompatActivity(), MPVLib.EventObserver, TouchGesturesObse
 
         val flags = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE
         window.decorView.systemUiVisibility = flags
+        if (player.isInitialized) {
+            MPVLib.setPropertyString("sub-margin-y", "22")
+        }
     }
 
     private fun hideControlsDelayed() {
