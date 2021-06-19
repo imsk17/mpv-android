@@ -130,7 +130,6 @@ class MPVActivity : AppCompatActivity(), MPVLib.EventObserver, TouchGesturesObse
 
     private var autoRotationMode = ""
 
-    private var controlsAtBottom = false
     private var showMediaTitle = false
 
     private var ignoreAudioFocus = false
@@ -398,7 +397,6 @@ class MPVActivity : AppCompatActivity(), MPVLib.EventObserver, TouchGesturesObse
         this.backgroundPlayMode = getString("background_play", R.string.pref_background_play_default)
         this.shouldSavePosition = prefs.getBoolean("save_position", false)
         this.autoRotationMode = getString("auto_rotation", R.string.pref_auto_rotation_default)
-        this.controlsAtBottom = prefs.getBoolean("bottom_controls", false)
         this.showMediaTitle = prefs.getBoolean("display_media_title", false)
         this.ignoreAudioFocus = prefs.getBoolean("ignore_audio_focus", false)
 
@@ -791,17 +789,7 @@ class MPVActivity : AppCompatActivity(), MPVLib.EventObserver, TouchGesturesObse
         run {
             val lp = RelativeLayout.LayoutParams(controls.layoutParams as RelativeLayout.LayoutParams)
 
-            lp.bottomMargin = if (!controlsAtBottom) {
-                Utils.convertDp(this, 60f)
-            } else {
-                if (isLandscape || !hasSoftwareKeys) 0 else Utils.convertDp(this, 48f)
-            }
-            lp.leftMargin = if (!controlsAtBottom) {
-                Utils.convertDp(this, if (isLandscape) 60f else 24f)
-            } else {
-                if (isLandscape && hasSoftwareKeys) Utils.convertDp(this, 48f) else 0
-            }
-            lp.rightMargin = lp.leftMargin
+            lp.bottomMargin = if (isLandscape || !hasSoftwareKeys) 0 else Utils.convertDp(this, 48f)
 
             controls.layoutParams = lp
         }
