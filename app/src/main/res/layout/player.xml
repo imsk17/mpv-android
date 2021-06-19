@@ -20,7 +20,7 @@
         android:layout_marginTop="60dp"
         android:paddingRight="10dp"
         android:layout_marginBottom="0dp"
-        android:background="#bf000000"
+        android:background="@drawable/shadow_bottom_to_top"
         android:orientation="vertical">
 
         <LinearLayout
@@ -209,12 +209,13 @@
     <LinearLayout
         android:id="@+id/top_controls"
         style="?android:attr/buttonBarStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:padding="10dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:alpha="0.5"
-        android:background="#bf000000"
+        android:gravity="end"
+        android:background="@drawable/shadow_top_to_bottom"
         android:orientation="horizontal">
 
         <ImageButton
