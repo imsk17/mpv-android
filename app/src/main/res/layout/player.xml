@@ -24,68 +24,17 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/controls_title_group"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <!-- These two are only used for audio -->
-            <TextView
-                android:id="@+id/titleTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="-"
-                android:textColor="@color/tint_normal"
-                android:textSize="24sp"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/minorTitleTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="-"
-                android:textColor="@color/tint_normal"
-                android:textSize="14sp"
-                android:visibility="gone" />
-
-            <!-- This one for video title display -->
-            <TextView
-                android:id="@+id/fullTitleTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="middle"
-                android:gravity="center"
-                android:singleLine="true"
-                android:text="-"
-                android:textColor="@color/tint_normal"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/controls_seekbar_group"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:weightSum="100">
 
-            <ImageButton
-                android:id="@+id/prevBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00000000"
-                android:onClick="playlistPrev"
-                android:src="@drawable/ic_skip_previous_black_24dp"
-                android:tint="@color/tint_normal" />
-
             <TextView
                 android:id="@+id/playbackPositionTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="10"
+                android:layout_weight="6"
                 android:gravity="center"
                 android:textColor="@android:color/white" />
 
@@ -93,26 +42,17 @@
                 android:id="@+id/playbackSeekbar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="80"
+                android:layout_gravity="center"
+                android:layout_weight="88"
                 android:progressBackgroundTint="@color/tint_seekbar_bg" />
 
             <TextView
                 android:id="@+id/playbackDurationTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="10"
+                android:layout_weight="6"
                 android:gravity="center"
                 android:textColor="@android:color/white" />
-
-            <ImageButton
-                android:id="@+id/nextBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00000000"
-                android:onClick="playlistNext"
-                android:src="@drawable/ic_skip_next_black_24dp"
-                android:tint="@color/tint_normal" />
 
         </LinearLayout>
 
@@ -124,13 +64,12 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/playBtn"
+                android:id="@+id/topLockBtn"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="playPause"
-                android:text="play"
-                android:textColor="@android:color/white"
+                android:onClick="lockUI"
+                android:src="@drawable/ic_lock_24dp"
                 android:tint="@color/tint_normal" />
 
             <ImageButton
@@ -155,13 +94,44 @@
                 android:textColor="@android:color/white"
                 android:tint="@color/tint_normal" />
 
+            <ImageButton
+                style="?android:attr/buttonBarButtonStyle"
+                android:id="@+id/prevBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:onClick="playlistPrev"
+                android:src="@drawable/ic_skip_previous_black_24dp"
+                android:tint="@color/tint_normal" />
+
+            <ImageButton
+                android:id="@+id/playBtn"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="playPause"
+                android:text="play"
+                android:src="@drawable/ic_play_arrow_black_24dp"
+                android:textColor="@android:color/white"
+                android:tint="@color/tint_normal" />
+
+            <ImageButton
+                style="?android:attr/buttonBarButtonStyle"
+                android:id="@+id/nextBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:onClick="playlistNext"
+                android:src="@drawable/ic_skip_next_black_24dp"
+                android:tint="@color/tint_normal" />
+
             <Button
                 android:id="@+id/cycleDecoderBtn"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="switchDecoder"
-                android:text=".."
+                android:text="DEC"
                 android:textColor="@android:color/white" />
 
             <Button
@@ -170,8 +140,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="cycleSpeed"
-                android:text=".."
+                android:text="1.0X"
                 android:textColor="@android:color/white" />
+
+            <ImageButton
+                android:id="@+id/topPiPBtn"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="goIntoPiP"
+                android:src="@drawable/ic_picture_in_picture_24dp"
+                android:tint="@color/tint_normal" />
 
         </LinearLayout>
     </LinearLayout>
@@ -210,39 +189,30 @@
         android:id="@+id/top_controls"
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
-        android:padding="10dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:gravity="end"
         android:background="@drawable/shadow_top_to_bottom"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="100"
+        android:padding="10dp">
 
-        <ImageButton
-            android:id="@+id/topLockBtn"
-            style="?android:attr/buttonBarStyle"
+        <TextView
+            android:layout_marginTop="8dp"
+            android:id="@+id/fullTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="40dp"
-            android:minHeight="40dp"
-            android:onClick="lockUI"
-            android:padding="4dp"
-            android:src="@drawable/ic_lock_24dp"
-            android:tint="@color/tint_normal" />
+            android:layout_weight="99"
+            android:ellipsize="middle"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="-"
+            android:textColor="@color/tint_normal"
+            android:textSize="16sp" />
 
         <ImageButton
-            android:id="@+id/topPiPBtn"
-            style="?android:attr/buttonBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="40dp"
-            android:minHeight="40dp"
-            android:onClick="goIntoPiP"
-            android:padding="4dp"
-            android:src="@drawable/ic_picture_in_picture_24dp"
-            android:tint="@color/tint_normal" />
-
-        <ImageButton
+            android:layout_weight="1"
+            android:layout_gravity="end"
             android:id="@+id/topMenuBtn"
             style="?android:attr/buttonBarStyle"
             android:layout_width="wrap_content"
