@@ -14,17 +14,21 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
+      - name: Export Release Timestamp
+        run: echo "APP_VERSION=mpv-android-$(date +'%m-%d-%Y')" >> $GITHUB_ENV
       # Get the dependencies
-      - run: cd buildscripts/ && bash download.sh
+      - name: Fetch The Dependencies
+        run: cd buildscripts/ && bash download.sh
       # Build The Debug APK
-      - run: cd buildscripts/ && bash buildall.sh
+      - name: Build APK
+        run: cd buildscripts/ && bash buildall.sh
       # Upload generated apk to the artifacts.
       - uses: marvinpinto/action-automatic-releases@latest
         with:
-          prerelease: false
+          prerelease: true
           repo_token: ${{ secrets.PANCAKE }}
           automatic_release_tag: "latest"
-          title: "App Releases"
+          title: ${{ secrets.APP_VERSION }}
           files: |
             LICENSE
             app/build/outputs/apk/debug/*.apk
