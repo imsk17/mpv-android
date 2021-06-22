@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mpvActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MPVActivity">
 
-    <view class="is.xyz.mpv.MPVView"
+    <is.xyz.mpv.MPVView
         android:id="@+id/player"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -15,13 +18,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
         android:layout_marginTop="60dp"
-        android:paddingRight="10dp"
         android:layout_marginBottom="0dp"
         android:background="@drawable/shadow_bottom_to_top"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp">
 
         <LinearLayout
             android:id="@+id/controls_seekbar_group"
@@ -95,8 +98,8 @@
                 android:tint="@color/tint_normal" />
 
             <ImageButton
-                style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/prevBtn"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#00000000"
@@ -110,14 +113,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="playPause"
-                android:text="play"
                 android:src="@drawable/ic_play_arrow_black_24dp"
+                android:text="play"
                 android:textColor="@android:color/white"
                 android:tint="@color/tint_normal" />
 
             <ImageButton
-                style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/nextBtn"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#00000000"
@@ -156,17 +159,17 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/statsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="stats"
-        android:id="@+id/statsTextView"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:textColor="#ffffff"
+        android:layout_alignParentTop="true"
         android:shadowColor="#000000"
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowRadius="1"
+        android:text="stats"
+        android:textColor="#ffffff"
         android:visibility="gone" />
 
     <TextView
@@ -194,14 +197,14 @@
         android:layout_alignParentEnd="true"
         android:background="@drawable/shadow_top_to_bottom"
         android:orientation="horizontal"
-        android:weightSum="100"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:weightSum="100">
 
         <TextView
-            android:layout_marginTop="8dp"
             android:id="@+id/fullTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_weight="99"
             android:ellipsize="middle"
             android:gravity="center"
@@ -211,12 +214,12 @@
             android:textSize="16sp" />
 
         <ImageButton
-            android:layout_weight="1"
-            android:layout_gravity="end"
             android:id="@+id/topMenuBtn"
             style="?android:attr/buttonBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_weight="1"
             android:minWidth="40dp"
             android:minHeight="40dp"
             android:onClick="openTopMenu"
